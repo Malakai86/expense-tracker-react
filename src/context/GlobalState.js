@@ -1,7 +1,8 @@
 import React, { createContext, useReducer } from 'react';
+import AppReducer from './AppReducer';
 
 // Initial state
-const initialSate = {
+const initialState = {
     transactions: [
   { id: 1, text: 'Flower', amount: -20 },
   { id: 2, text: 'Salary', amount: 300 },
@@ -15,9 +16,11 @@ export const GlobalContext = createContext(initialState);
 
 //Prodiver componenet
 export const GlobalProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(AppReducer, initialSate);
+    const [state, dispatch] = useReducer(AppReducer, initialState);
 
-    return (<GlobalContext.Provider>
+    return (<GlobalContext.Provider value={{
+        transactions:state.transactions
+    }}>
         { children }
     </GlobalContext.Provider>);
 }
